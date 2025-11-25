@@ -41,6 +41,7 @@ export class GameManager {
            }
            else{
              this.pendingUser = socket;
+             console.log("one user connected waiting for another user")
            }
            break;
 

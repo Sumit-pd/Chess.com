@@ -12,6 +12,7 @@ export class GameManager {
     }
     addPlayer(user) {
         this.users.push(user);
+        this.handleMessage(user);
     }
     removePlayer(user) {
         this.users = this.users.filter(elem => elem !== user);
@@ -24,11 +25,12 @@ export class GameManager {
                     if (this.pendingUser) {
                         const game = new Game(this.pendingUser, socket);
                         this.games.push(game);
-                        socket.send(JSON.stringify({ type: 'START_GAME' }));
+                        //  socket.send(JSON.stringify({ type: 'START_GAME' }));
                         this.pendingUser = null;
                     }
                     else {
                         this.pendingUser = socket;
+                        console.log("one user connected waiting for another user");
                     }
                     break;
                 case MOVE:

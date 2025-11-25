@@ -38,10 +38,12 @@ export class Game {
         }
         else {
             if (this.board.moves.length % 2 == 0) {
-                this.player1.send(JSON.stringify({ type: MOVE, payload: move }));
+                this.player1.send(JSON.stringify({ type: MOVE, payload: move, color: "White" }));
+                this.player2.send(JSON.stringify({ type: MOVE, payload: move, color: "Black" }));
             }
             else {
-                this.player2.send(JSON.stringify({ type: MOVE, payload: move }));
+                this.player1.send(JSON.stringify({ type: MOVE, payload: move, color: "White" }));
+                this.player2.send(JSON.stringify({ type: MOVE, payload: move, color: "Black" }));
             }
         }
     }
