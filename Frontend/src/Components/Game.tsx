@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useSocket } from "../useSocket";
 import ChessBoard from "./ChessBoard";
 import { Chess } from "chess.js";
+import { MOVE,INIT_GAME,INVALID_MOVE } from "../../../Backend1/src/messages";
 
-const INIT_GAME = 'INIT_GAME';
-const MOVE = "MOVE"
+
 
 
 const Game = () => {
@@ -34,7 +34,11 @@ const Game = () => {
                 setBoard(chess.board())
                 console.log("Move");
                 break
+            case INVALID_MOVE:
+                console.log("invalid Move");
             }
+
+            
             
                 
         }

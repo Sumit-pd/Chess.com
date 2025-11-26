@@ -19,24 +19,27 @@ const ChessBoard = ({ board, socket }: iChessBoardProps) => {
         square: Square;
         type: PieceSymbol;
         color: Color;
-    } | null) => {
-        if (from) {
-            setFrom(square?.square ?? null)
+    } | null,squareRepresentation:Square) => {
+        if (!from) {
+            setFrom(squareRepresentation)
+            
+        }
+        else
+        {
+            
+            
             try {
                 socket.send(JSON.stringify({
                     type:MOVE,
                     payload:{
                         from,
-                        to
+                        to:squareRepresentation
                     }
                 }))
+                setFrom(null)
             } catch (error) {
-                
+                console.log(error);
             }
-        }
-        else
-        {
-            setTo(square?.square ?? null)
         }
     }
 
@@ -45,9 +48,10 @@ const ChessBoard = ({ board, socket }: iChessBoardProps) => {
         {board.map((row, i) => {
             return <div key={i} className="flex">
                 {row.map((square, j) => {
+                    const squareRepresentation = String.fromCharCode(97 + (j % 8)) + "" + (8-i) as Square
                     return <div 
                     onClick={() => {
-                        handleMove(square)
+                        handleMove(square,squareRepresentation)
                     }}
                     key={j} className={`w-16 h-16 ${(i + j) % 2 === 0 ? 'bg-green-500' : 'bg-white'}`}>
                         <div className="w-full justify-center flex h-full">
