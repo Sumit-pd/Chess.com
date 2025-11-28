@@ -57,7 +57,8 @@ const ChessBoard = ({ board, socket }: iChessBoardProps) => {
                         <div className="w-full justify-center flex h-full">
                             <div className="h-full justify-center flex flex-col">
 
-                                {square ? square.type : ''}
+                            {square ? <img className="w-12" src={`/${square.color}${square.type}.png`}/> : null}
+
                             </div>
                         </div>
                     </div>

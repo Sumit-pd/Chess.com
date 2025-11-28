@@ -11,7 +11,7 @@ const Game = () => {
     const socket = useSocket();
     const [chess, setChess] = useState(new Chess());
     const [board,setBoard] = useState(chess.board())
-
+    const [start,setStarted] = useState(true)
 
     useEffect(() => {
         if(!socket)
@@ -26,6 +26,7 @@ const Game = () => {
             case INIT_GAME:
                 setChess(new Chess())
                 setBoard(chess.board())
+                setStarted(false)
                 console.log("game initialized");
                 break
             case MOVE:
@@ -57,7 +58,7 @@ const Game = () => {
                             <ChessBoard board={board} socket={socket} />
                         </div>
                         <div className="col-span-2 flex items-center justify-center">
-                            <button className="bg-green-500 text-white text-2xl px-12 py-6 rounded-2xl font-bold hover:bg-green-600 transition-all"
+                            {start && <button className="bg-green-500 text-white text-2xl px-12 py-6 rounded-2xl font-bold hover:bg-green-600 transition-all"
                                 onClick={() => {
                                     console.log("clicked");
                                     
@@ -66,7 +67,7 @@ const Game = () => {
                                     }))
                                 }}>
                                 Play
-                            </button>
+                            </button>}
                         </div>
                     </div>
                 </div>

@@ -1,7 +1,7 @@
 import WebSocket from "ws";
 import { Chess } from 'chess.js'
 import ws from "ws";
-import {MOVE} from "./messages.js"
+import {INIT_GAME,MOVE} from "./messages.js"
 
 
 export class Game{
@@ -16,8 +16,8 @@ export class Game{
         this.player2 = player2;
         this.board = new Chess();
         this.startTime = new Date();
-        player1.send(JSON.stringify({ type: 'START_GAME', payload: this.board.fen() }));
-        player2.send(JSON.stringify({ type: 'START_GAME', payload: this.board.fen() }));
+        player1.send(JSON.stringify({ type: INIT_GAME, payload: this.board.fen() }));
+        player2.send(JSON.stringify({ type: INIT_GAME, payload: this.board.fen() }));
     }
 
     hasPlayer(socket: WebSocket): boolean {
